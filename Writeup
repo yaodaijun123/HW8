@@ -1,0 +1,41 @@
+1. Implementation
+I implemented two methods to find the nearest neighbor: Brute Force and K-d Tree. Brute Force checks every point and finds the one with the smallest distance. K-d Tree organizes points into a binary tree. It uses the median to split the points and changes the splitting dimension at each level.
+During the search, K-d Tree first searches the closer branch. It also checks the other branch if there could be a closer point.
+
+2. Testing
+I wrote five tests to check my implementation. All five tests passed.
+The tests covered normal nearest neighbor search, one point, an empty tree, backtracking, and 3D points.
+
+3. Benchmark Results
+I tested both methods with 1,000 queries for each combination of dimensions and data sizes.
+All times are in milliseconds.
+
+k, numPoints, build(ms), kd(ms), brute(ms)
+2, 10, 2.772, 1.643, 1.088
+2, 100, 0.967, 0.705, 1.487
+2, 1000, 4.255, 1.236, 4.603
+2, 10000, 18.587, 1.145, 47.152
+5, 10, 0.026, 0.377, 0.117
+5, 100, 0.05, 1.402, 0.756
+5, 1000, 0.698, 3.442, 6.589
+5, 10000, 16.647, 4.999, 65.846
+10, 10, 0.009, 0.437, 0.16
+10, 100, 0.034, 4.523, 1.073
+10, 1000, 0.653, 42.741, 11.134
+10, 10000, 12.439, 191.604, 109.06
+20, 10, 0.007, 0.686, 0.187
+20, 100, 0.037, 7.001, 1.878
+20, 1000, 0.584, 80.254, 16.181
+20, 10000, 10.425, 890.177, 187.125
+
+4. Analysis
+My results show that K-d Tree is faster for larger datasets with a small number of dimensions.
+For example, with 10,000 points in 2 dimensions, K-d Tree took 1.145 ms, while Brute Force took 47.152 ms.
+However, when the number of dimensions increased, K-d Tree became slower.
+With 10,000 points in 20 dimensions, K-d Tree took 890.177 ms, while Brute Force took 187.125 ms.
+Brute Force checks every point, but its process is simple. In high dimensions, K-d Tree may also need to check many points. 
+It also spends extra time searching branches and backtracking. Therefore, Brute Force can be faster.
+
+5. Conclusion
+K-d Tree works well for large datasets with low dimensions. Brute Force can be better for small datasets or high-dimensional data.
+The best method depends on the number of points and the number of dimensions.
